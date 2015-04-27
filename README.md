@@ -8,4 +8,3 @@ Final Project
   To whom it may concern, this program was written in Geany
   Enjoy!
 
-FYI: the file titled project_file1 below the README is garbage. It is blank and not part of the actual project.
