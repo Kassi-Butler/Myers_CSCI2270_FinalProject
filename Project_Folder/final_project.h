@@ -14,13 +14,13 @@ class CardDeck{
 	public:
 		/*The constructor is called when the object is created.
 		 * Its main purpose is to create the deck pointer array
-		 * mentioned in the header file and set all the pointers 
+		 * mentioned in the header file and set all the pointers
 		 * in the array to NULL to prevent memory leaks. Better
 		 * Safe than Sorry.
 		 */
 		CardDeck();//done
 		/*The deconstructor is not specifically called except when
-		 * the program terminates. Although it is necesary for the 
+		 * the program terminates. Although it is necesary for the
 		 * code to run, it has no specific funtion to the code itself
 		 */
 		virtual ~CardDeck();
@@ -32,22 +32,22 @@ class CardDeck{
 		/*the makeDeck function makes the Deck. It takes the initialized
 		 * array in the constructor and fills it with 52 cards of the
 		 * four suits and 13 values (2-Ace ace high). It has no
-		 * pre-conditions and shoud display ecery card in the deck in 
+		 * pre-conditions and shoud display ecery card in the deck in
 		 * order of suit and number.
 		 */
 		void makeDeck();
-		/*shuffleDeck is a combination of handShuffle and cutDeck. It 
-		 * handShuffles and cuts the deck a random number of times between 
+		/*shuffleDeck is a combination of handShuffle and cutDeck. It
+		 * handShuffles and cuts the deck a random number of times between
 		 * one and six. it requires the handShuffle and cutDeck functions
 		 * to be made as well as the deck to be created and filled. it shuffles
 		 * the entire deck quite well.
 		 */
 		void shuffleDeck();
-		/*handShuffle is the closest function to an actual hand shuffle 
+		/*handShuffle is the closest function to an actual hand shuffle
 		 * there is. First, the Cards are split into two equal piles of 26,
-		 * then linked together in a linked list of Cards so that the 
+		 * then linked together in a linked list of Cards so that the
 		 * piles mash together as if you were perfectly shuffling a deck.
-		 * This function can only be used after the makeDeck function is 
+		 * This function can only be used after the makeDeck function is
 		 * called. This should shuffle the deck with some patterns
 		 */
 		void handShuffle();
@@ -58,7 +58,7 @@ class CardDeck{
 		void sortBySuit();
 		/*sortbyValue is the opposite of sortBySuit in that it ignores
 		 * suit and only adressed value. It requires the makeDeck function
-		 * as well as only being called within the first three methods due 
+		 * as well as only being called within the first three methods due
 		 * to some internal errors. If called soon after makeDeck is called
 		 * it should print the entire deck sorted by value (Ace High).
 		 */
@@ -72,12 +72,12 @@ class CardDeck{
 		void cutDeck();
 		/*classicShuffle uses a classic randomizing algorith to randomly pairs of
 		 * cards throughout the deck. It is a fairly efficient shuffling algorithm.
-		 * it requres the deck to be filled and the swap function to have been 
+		 * it requres the deck to be filled and the swap function to have been
 		 * created, as it directly calles the swap function.
 		 */
 		void classicShuffle();
 		/*swap is simply a helper function to classicShuffle. It takes two cards
-		 * and switches them. It is never directly called, and only requires the 
+		 * and switches them. It is never directly called, and only requires the
 		 * two cards to switch. It takes a min and max of two argumants.
 		 */
 		void swap(Card *a, Card *b);
@@ -87,7 +87,4 @@ class CardDeck{
 };
 
 
-
-
-
-#endif 
+#endif
