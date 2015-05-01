@@ -8,7 +8,7 @@
 #include "final_project.h"
 /*The constructor is called when the object is created.
  * Its main purpose is to create the deck pointer array
- * mentioned in the header file and set all the pointers 
+ * mentioned in the header file and set all the pointers
  * in the array to NULL to prevent memory leaks. Better
  * Safe than Sorry.
  */
@@ -18,17 +18,18 @@ CardDeck::CardDeck(){//constructor
 	}
 }
 /*The deconstructor is not specifically called except when
- * the program terminates. Although it is necesary for the 
+ * the program terminates. Although it is necesary for the
  * code to run, it has no specific funtion to the code itself
  */
 CardDeck::~CardDeck(){//deconstructor
-	
+
 }
 /*The showMenu function gives you all the options available
  * in the code, including quit. It has no pre-conditions
  * and shows the menu as a post-condition.
  */
 void CardDeck::showMenu(){//displays menu
+    std::cout << std::endl;
 	std::cout<<"1. Create Deck"<<std::endl;
 	std::cout<<"2. Shuffle Deck"<<std::endl;
 	std::cout<<"3. Hand Shuffle Deck"<<std::endl;
@@ -41,7 +42,7 @@ void CardDeck::showMenu(){//displays menu
 /*the makeDeck function makes the Deck. It takes the initialized
  * array in the constructor and fills it with 52 cards of the
  * four suits and 13 values (2-Ace ace high). It has no
- * pre-conditions and shoud display ecery card in the deck in 
+ * pre-conditions and shoud display ecery card in the deck in
  * order of suit and number.
  */
 void CardDeck::makeDeck(){//makes a deck of Card sturctures
@@ -86,19 +87,19 @@ void CardDeck::makeDeck(){//makes a deck of Card sturctures
 		if(deck[j]->value == 14){
 			deck[j]->name = "Ace";
 		}
-		
+
 		std::cout<<deck[j]->name<<" of "<<deck[j]->suit<<std::endl;
 	}
 }
-/*handShuffle is the closest function to an actual hand shuffle 
+/*handShuffle is the closest function to an actual hand shuffle
  * there is. First, the Cards are split into two equal piles of 26,
- * then linked together in a linked list of Cards so that the 
+ * then linked together in a linked list of Cards so that the
  * piles mash together as if you were perfectly shuffling a deck.
- * This function can only be used after the makeDeck function is 
+ * This function can only be used after the makeDeck function is
  * called. This should shuffle the deck with some patterns
  */
 void CardDeck::handShuffle(){//cuts the deck in half and evenly mashes the cards together, similar to a normal hand shuffle. Uses a linked list
-	ShuffleList *head = new ShuffleList;
+	/*ShuffleList *head = new ShuffleList;
 	head->cardptr = deck[51];
 	for(int i = 26; i > 0; i--){
 		ShuffleList *temp = new ShuffleList;
@@ -113,7 +114,24 @@ void CardDeck::handShuffle(){//cuts the deck in half and evenly mashes the cards
 		deck[j] = head->cardptr;
 		head = head->next;
 		std::cout<<deck[j]->name<<" of "<<deck[j]->suit<<std::endl;
+	}*/
+
+	//create a temporary copy of the deck
+	Card* temp[52];
+	for (int i = 0; i < 52; i++){
+        temp[i] = deck[i];
 	}
+
+    //replace with every other value
+	for (int i = 0; i < 26; i++){
+        deck[2*i] = temp[i];
+        deck[2*i + 1] = temp[26 + i];
+	}
+
+    //print new deck
+	for (int i = 0; i < 52; i++){
+        std::cout<<deck[i]->name<<" of "<<deck[i]->suit<<std::endl;
+    }
 	std::cout<<"--------"<<std::endl;
 }
 /*cutDeck takes a random card between 11 and 29, takes the cards
@@ -129,7 +147,7 @@ void CardDeck::cutDeck(){//cuts the deck at a random card around half
 	for(int k = 0; k < 52-cut; k++){//0 to 16
 		newDeck[k] = deck[cut+k];
 	}
-	for(int i = 0; i < cut; i++){//0 to 34 
+	for(int i = 0; i < cut; i++){//0 to 34
 		newDeck[52-cut+i] = deck[i];//17 to 51
 	}
 	for(int j = 0; j < 52; j++){
@@ -172,7 +190,7 @@ void CardDeck::sortBySuit(){//sorts cards by suit only, ignoring value
 }
 /*sortbyValue is the opposite of sortBySuit in that it ignores
  * suit and only adressed value. It requires the makeDeck function
- * as well as only being called within the first three methods due 
+ * as well as only being called within the first three methods due
  * to some internal errors. If called soon after makeDeck is called
  * it should print the entire deck sorted by value (Ace High).
  */
@@ -191,7 +209,13 @@ void CardDeck::sortByValue(){//sorts cards by value only, ignoring suit
 	int four_count = 40;
 	int three_count = 44;
 	int two_count = 48;
+	/*for(int i = 0; i < 52; i++){
+        std::cout << deck[i]->value << std::endl;
+	}*/
+
 	for(int i = 0; i < 52; i++){
+
+	//std::cout << i <<" " << deck[i]->value << std::endl;
 		if(deck[i]->value == 14){
 			valDeck[ace_count] = deck[i];
 			ace_count++;
@@ -245,26 +269,29 @@ void CardDeck::sortByValue(){//sorts cards by value only, ignoring suit
 			two_count++;
 		}
 	}
+
+
 	for(int j = 0; j < 52; j++){
 		deck[j] = valDeck[j];
 		std::cout<<deck[j]->name<<" of "<<deck[j]->suit<<std::endl;
 	}
 }
-/*shuffleDeck is a combination of handShuffle and cutDeck. It 
- * handShuffles and cuts the deck a random number of times between 
+/*shuffleDeck is a combination of handShuffle and cutDeck. It
+ * handShuffles and cuts the deck a random number of times between
  * one and six. it requires the handShuffle and cutDeck functions
  * to be made as well as the deck to be created and filled. it shuffles
  * the entire deck quite well.
  */
 void CardDeck::shuffleDeck(){
-	int shuffle = rand()% 1 + 5;
+    //rand()%1+5 is always five. I changed it to 10 so now it will be between 5 and 15
+	int shuffle = rand()% 10 + 5;
 	for(int i = 0; i < shuffle; i++){
 		handShuffle();
 		cutDeck();
 	}
 }
 /*swap is simply a helper function to classicShuffle. It takes two cards
- * and switches them. It is never directly called, and only requires the 
+ * and switches them. It is never directly called, and only requires the
  * two cards to switch. It takes a min and max of two argumants.
  */
 void CardDeck::swap(Card *a, Card *b){//swaps two cards, used in Classic Shuffle
@@ -274,7 +301,7 @@ void CardDeck::swap(Card *a, Card *b){//swaps two cards, used in Classic Shuffle
 }
 /*classicShuffle uses a classic randomizing algorith to randomly pairs of
  * cards throughout the deck. It is a fairly efficient shuffling algorithm.
- * it requres the deck to be filled and the swap function to have been 
+ * it requres the deck to be filled and the swap function to have been
  * created, as it directly calles the swap function.
  */
 void CardDeck::classicShuffle(){

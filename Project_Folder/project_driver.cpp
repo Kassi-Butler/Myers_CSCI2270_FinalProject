@@ -8,9 +8,9 @@
 using namespace std;
 int main(){
 	CardDeck DeckObj;
-	DeckObj.showMenu();
 	int input;
-	while(input != 10){
+	while(input != 8){
+        DeckObj.showMenu();
 		cin>>input;
 		if(input == 1){
 			cin.ignore();
@@ -50,8 +50,8 @@ int main(){
 		else if(input == 8){
 			cin.ignore();
 			input = 0;
+			return 0;
 		}
 	}
 	return 0;
 }
-
