@@ -99,7 +99,7 @@ void CardDeck::makeDeck(){//makes a deck of Card sturctures
  * called. This should shuffle the deck with some patterns
  */
 void CardDeck::handShuffle(){//cuts the deck in half and evenly mashes the cards together, similar to a normal hand shuffle. Uses a linked list
-	/*ShuffleList *head = new ShuffleList;
+	ShuffleList *head = new ShuffleList;
 	head->cardptr = deck[51];
 	for(int i = 26; i > 0; i--){
 		ShuffleList *temp = new ShuffleList;
@@ -114,8 +114,8 @@ void CardDeck::handShuffle(){//cuts the deck in half and evenly mashes the cards
 		deck[j] = head->cardptr;
 		head = head->next;
 		std::cout<<deck[j]->name<<" of "<<deck[j]->suit<<std::endl;
-	}*/
-
+	}
+/*
 	//create a temporary copy of the deck
 	Card* temp[52];
 	for (int i = 0; i < 52; i++){
@@ -132,6 +132,7 @@ void CardDeck::handShuffle(){//cuts the deck in half and evenly mashes the cards
 	for (int i = 0; i < 52; i++){
         std::cout<<deck[i]->name<<" of "<<deck[i]->suit<<std::endl;
     }
+    */
 	std::cout<<"--------"<<std::endl;
 }
 /*cutDeck takes a random card between 11 and 29, takes the cards
